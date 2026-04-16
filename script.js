@@ -14,7 +14,7 @@ const CONFIG = {
   password: '09/11/2021',
   passwordAlt: ['09112021', '9/11/2021', '09-11-2021', '9-11-2021', '09.11.2021', '9.11.2021', '9/11/21', '09/11/21'],
   
-  photoFolder: 'importaciones/',
+  photoFolder: '',
   
   // Actual photo filenames found in the folder
   photos: [
