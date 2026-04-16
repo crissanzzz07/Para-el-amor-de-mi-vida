@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Una carta de amor especial para Clara">
+  <title>Para ti, mi niña hermosa ❤️</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- SECTION 1: PASSWORD GATE                     -->
+  <!-- ============================================ -->
+  <section id="password-section" class="section active">
+    <div class="password-particles" id="password-particles"></div>
+    <div class="password-container">
+      <div class="password-card">
+        <div class="heart-icon">
+          <svg viewBox="0 0 64 64" class="heart-svg">
+            <path d="M32 56S4 36 4 18C4 8 12 2 20 2c5 0 9.5 2.5 12 6.5C34.5 4.5 39 2 44 2c8 0 16 6 16 16 0 18-28 38-28 38z" 
+                  fill="url(#heartGrad)" stroke="none"/>
+            <defs>
+              <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#ff6b8a"/>
+                <stop offset="100%" style="stop-color:#ee4466"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h1 class="password-title">Un secreto entre nosotros</h1>
+        <p class="password-subtitle">Ingresa la fecha que solo tú y yo conocemos...</p>
+        <form id="password-form" autocomplete="off">
+          <div class="input-wrapper">
+            <input type="text" id="password-input" placeholder="dd/mm/aaaa" maxlength="10" autocomplete="off" inputmode="numeric">
+            <div class="input-glow"></div>
+          </div>
+          <button type="submit" id="password-btn" class="btn-romantic">
+            <span>Abrir mi corazón</span>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </form>
+        <p id="password-error" class="password-error hidden">Intenta de nuevo ❤️</p>
+        <div class="password-hint">
+          <span class="hint-sparkle">✨</span>
+          <span>Pista: Nuestro primer día juntos</span>
+          <span class="hint-sparkle">✨</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 2: MAIN SCENE                        -->
+  <!-- ============================================ -->
+  <section id="main-section" class="section">
+    <!-- Fixed Animated Background (always visible) -->
+    <div class="scene-background" id="scene-background">
+      <img src="assets/sunset_background.png" alt="Atardecer" class="bg-image" id="bg-image">
+      <div class="bg-overlay"></div>
+      <!-- Animated CSS Flowers -->
+      <div class="flowers-layer" id="flowers-layer"></div>
+    </div>
+    
+    <!-- Floating Petals Canvas (always on top) -->
+    <canvas id="petals-canvas"></canvas>
+    
+    <!-- Fireflies -->
+    <div class="fireflies" id="fireflies"></div>
+    
+    <!-- Sun Rays -->
+    <div class="sun-rays">
+      <div class="ray ray-1"></div>
+      <div class="ray ray-2"></div>
+      <div class="ray ray-3"></div>
+      <div class="ray ray-4"></div>
+      <div class="ray ray-5"></div>
+    </div>
+
+    <!-- Main Content Area (scrollable) -->
+    <div class="main-content" id="main-content">
+      <!-- Initial View: Title + Sword -->
+      <div class="hero-area" id="hero-area">
+        <div class="scene-title" id="scene-title">
+          <h2 class="scene-heading">Para ti, Clara</h2>
+          <p class="scene-subtext">Toca la espada para descubrir lo que guarda mi corazón</p>
+        </div>
+
+        <div class="sword-container" id="sword-container">
+          <div class="sword-glow"></div>
+          <svg id="sword-svg" class="sword" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#e8e0d4"/>
+                <stop offset="30%" style="stop-color:#f5f0e8"/>
+                <stop offset="50%" style="stop-color:#ffffff"/>
+                <stop offset="70%" style="stop-color:#f5f0e8"/>
+                <stop offset="100%" style="stop-color:#d4c9b8"/>
+              </linearGradient>
+              <linearGradient id="bladeShine" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.8)"/>
+                <stop offset="50%" style="stop-color:rgba(255,255,255,0)"/>
+                <stop offset="100%" style="stop-color:rgba(200,190,170,0.3)"/>
+              </linearGradient>
+              <linearGradient id="handleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#8B4513"/>
+                <stop offset="50%" style="stop-color:#654321"/>
+                <stop offset="100%" style="stop-color:#4a2f10"/>
+              </linearGradient>
+              <linearGradient id="guardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#DAA520"/>
+                <stop offset="50%" style="stop-color:#B8860B"/>
+                <stop offset="100%" style="stop-color:#8B6914"/>
+              </linearGradient>
+              <filter id="swordShadow">
+                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(0,0,0,0.3)"/>
+              </filter>
+              <filter id="bladeGlow">
+                <feGaussianBlur stdDeviation="2" result="glow"/>
+                <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#swordShadow)">
+              <polygon points="100,48 520,55 530,60 520,65 100,72" fill="url(#bladeGrad)" stroke="#c9b896" stroke-width="0.5"/>
+              <polygon points="110,50 515,56 515,60 110,58" fill="url(#bladeShine)" opacity="0.6"/>
+              <polygon points="520,55 580,60 520,65" fill="url(#bladeGrad)" stroke="#c9b896" stroke-width="0.5" filter="url(#bladeGlow)"/>
+              <line x1="130" y1="60" x2="500" y2="60" stroke="rgba(180,160,130,0.3)" stroke-width="1"/>
+              <ellipse cx="100" cy="60" rx="12" ry="28" fill="url(#guardGrad)" stroke="#8B6914" stroke-width="1.5"/>
+              <ellipse cx="100" cy="60" rx="8" ry="22" fill="none" stroke="#DAA520" stroke-width="0.8" opacity="0.6"/>
+              <circle cx="100" cy="45" r="3" fill="#DAA520" opacity="0.8"/>
+              <circle cx="100" cy="75" r="3" fill="#DAA520" opacity="0.8"/>
+              <rect x="30" y="50" width="70" height="20" rx="4" fill="url(#handleGrad)" stroke="#3a2008" stroke-width="1"/>
+              <line x1="40" y1="50" x2="50" y2="70" stroke="#DAA520" stroke-width="1.5" opacity="0.5"/>
+              <line x1="55" y1="50" x2="65" y2="70" stroke="#DAA520" stroke-width="1.5" opacity="0.5"/>
+              <line x1="70" y1="50" x2="80" y2="70" stroke="#DAA520" stroke-width="1.5" opacity="0.5"/>
+              <circle cx="28" cy="60" r="10" fill="url(#guardGrad)" stroke="#8B6914" stroke-width="1.5"/>
+              <circle cx="28" cy="60" r="5" fill="#DAA520" opacity="0.4"/>
+              <circle cx="28" cy="60" r="2" fill="#ee4466" opacity="0.9"/>
+            </g>
+          </svg>
+          <p class="sword-hint">✦ Click para revelar ✦</p>
+        </div>
+      </div>
+
+      <!-- Letter Panel (slides down from sword) -->
+      <div class="letter-panel" id="letter-panel">
+        <div class="letter-connector"></div>
+        <div class="letter-parchment">
+          <img src="assets/parchment_letter.png" alt="" class="parchment-bg">
+          <div class="letter-content" id="letter-content">
+            <h2 class="letter-title">Para mi niña hermosa…</h2>
+            <div class="letter-body" id="letter-body">
+              <p>Hola bella, había pensado en que hace mucho no te daba una carta, de hecho en diciembre quería hacer una pero no pude.</p>
+              <p>Creo que si hacía ya un tiempo que no te hacía una carta, y no recuerdo como se hacía, pero sí me acuerdo que siempre te he amado y siempre lo he hecho con mucho amor.</p>
+              <p>Muchas veces, te digo que estás loca o que me vuelves loco, y sí es cierto, pero no te digo mucho que en realidad también me siento muy cómodo contigo, que me siento seguro, querido, amado, valorado y muchas cosas más.</p>
+              <p>Cuando no estás siento que hay una parte de mí qué hace falta, y es esa misma de la que te hablo, la parte de ti que me hace sentir así. Esa es una de las razones por las que estoy contigo.</p>
+              <p>Me vuelves loco!, de las mejores y las peores maneras posibles, me vuelves loco cuando no sé qué hacer contigo, pero hay otras cosas con la que más me vuelves loco, como la manera en que caminas, en que te mueves, me vuelve loco tu delicadeza, tu cuerpo, tus facciones, tus extremidades, tu boca, tu forma de reír, la forma en que te intentas defender cuando te hago una travesura, me vuelve loquísimo cuando me haces reír con tus chistes. Pero bueno, no eres mi psiquiatra para decirte todas las cosas que me vuelven loco, aunque ya te imaginas que tan loco estoy por ti.</p>
+              <p>Creo que el recuerdo que más tengo presente cuando te hago una carta es cuando te acompañé a la entrada de donde vives, estábamos afuera y tú pusiste tus manos en mis hombros y yo agarré tu cintura. Creo que si me dicen de que en 5 segundos elija a qué momento quiero ir, definitivamente sería uno donde estás tú, y uno probablemente sería este o nuestro primer beso, nuestro primer abrazo, cuando nos agarramos la mano por primera vez, nuestra primera cita, nuestras clases con la maestra Edith, cuando nos salíamos de la prepa, cuando viviste en mi casa, y muchos más, porque he pasado por momentos tan bonitos cuando estás a mi lado, y en esos momentos que son tan bonitos para mí, es cuando me doy cuenta de lo mucho que te amo porque: hice, hago, y haría cosas por ti que no haría por nadie más.</p>
+              <p>Así como hemos crecido juntos desde los 14 años y hoy que ya cumples 19 años. No sé exactamente cómo será el futuro, pero sí sé que me gustaría que sigas a mi lado y que podamos combatir con cada problema y siempre salir adelante juntos, como lo hemos hecho por 4 años, 5 meses y 7 días.</p>
+              <p>Quiero desearte un feliz cumpleaños, que la pases muy bien, hoy, y cada día de tu vida, con suerte para mí, podré acompañarte toda la vida que dios nos dé.</p>
+              <p>Te amo tanto que no creo que en una ida y vuelta al lugar más lejano que conoce el ser humano, me alcance para expresar todoo mi amor por ti.</p>
+              <p class="letter-final">Si hay algo que tengo claro en esta vida, es que siempre voy a elegirte a ti.</p>
+              <p class="letter-signature">Con mucho amor,<br><em>Tu bebecito.</em></p>
+            </div>
+            <div class="letter-footer">
+              <button class="btn-romantic btn-gallery" id="btn-go-gallery">
+                <span>Ver nuestros momentos juntos</span>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 3: PHOTO GALLERY                     -->
+  <!-- ============================================ -->
+  <section id="gallery-section" class="section">
+    <div class="gallery-bg"></div>
+    <div class="gallery-particles" id="gallery-particles"></div>
+    
+    <div class="gallery-header">
+      <h2 class="gallery-title">Nuestros Momentos</h2>
+      <p class="gallery-subtitle">Cada foto es un pedacito de nosotros ❤️</p>
+      <div class="gallery-divider">
+        <span class="divider-heart">♥</span>
+      </div>
+    </div>
+
+    <div class="gallery-container" id="gallery-container">
+      <div class="gallery-placeholder" id="gallery-placeholder" style="display:none;">
+        <div class="placeholder-icon">📸</div>
+        <p>Agrega tus fotos en la carpeta <strong>importaciones/</strong></p>
+      </div>
+    </div>
+
+    <div class="gallery-footer">
+      <button class="btn-romantic btn-special" id="btn-go-special">
+        <span class="btn-sparkle">✨</span>
+        <span>Un detalle especial</span>
+        <span class="btn-sparkle">✨</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 4: FINAL DETAIL                      -->
+  <!-- ============================================ -->
+  <section id="special-section" class="section">
+    <div class="special-bg"></div>
+    <div class="special-stars" id="special-stars"></div>
+    
+    <div class="special-container">
+      <div class="special-card">
+        <h2 class="special-title">Un detalle especial para ti</h2>
+        
+        <div class="album-container" id="album-container">
+          <div class="album-vinyl">
+            <div class="vinyl-disc" id="vinyl-disc">
+              <div class="vinyl-grooves"></div>
+              <div class="vinyl-label"><span>JS</span></div>
+            </div>
+          </div>
+          <div class="album-cover-wrapper">
+            <!-- Real Joan Sebastian album cover from Spotify CDN -->
+            <img src="https://image-cdn-ak.spotifycdn.com/image/ab67616d0000b2731d88f9d9a2b6b85b290ca24e" 
+                 alt="Más allá del sol - Joan Sebastian" 
+                 class="album-cover" id="album-cover"
+                 crossorigin="anonymous">
+            <div class="album-shine"></div>
+          </div>
+          <div class="album-info">
+            <h3 class="album-name">Más allá del sol</h3>
+            <p class="album-artist">Joan Sebastian</p>
+          </div>
+        </div>
+
+        <div class="dedication-text" id="dedication-text">
+          <p class="dedication-body">
+            Hay artistas que marcan la vida de las personas, y Joan Sebastian es uno de esos artistas 
+            que siempre ha sido muy especial para ti. Sus canciones llevan un pedacito de lo que siento 
+            cada vez que pienso en nosotros — por eso esta canción tiene un significado tan profundo para mí, 
+            porque cada palabra parece escrita pensando en lo nuestro.
+          </p>
+        </div>
+
+        <div class="spotify-reveal" id="spotify-reveal">
+          <button class="btn-spotify" id="btn-spotify">
+            <svg class="spotify-icon" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+            </svg>
+            <span>Te dedico esta canción mi amor</span>
+          </button>
+          
+          <div class="spotify-link-container hidden" id="spotify-link-container">
+            <!-- Real Spotify Embed Player -->
+            <div class="spotify-embed-wrapper">
+              <iframe style="border-radius: 12px" 
+                      width="100%" height="152" 
+                      title="Spotify Embed: Más Allá Del Sol" 
+                      frameborder="0" 
+                      allowfullscreen 
+                      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                      loading="lazy" 
+                      src="https://open.spotify.com/embed/track/3rusXt8aQcGDtYImYtL5tm?utm_source=oembed&theme=0">
+              </iframe>
+            </div>
+            
+            <a href="https://open.spotify.com/intl-es/track/3rusXt8aQcGDtYImYtL5tm?si=42ba3e3caaab43fe" 
+               target="_blank" rel="noopener noreferrer" class="spotify-link" id="spotify-link">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+              </svg>
+              <span>Abrir en Spotify</span>
+            </a>
+            
+            <div class="final-message">
+              <div class="message-decoration">❤️</div>
+              <p class="final-text">
+                Clara, cada momento a tu lado es un regalo que atesoro con todo mi corazón. 
+                Desde aquel 9 de noviembre en que empezó nuestra historia, cada día ha sido más hermoso que el anterior. 
+                Eres mi persona favorita en todo el universo, y no importa cuántas canciones existan, 
+                ninguna podría expresar lo que siento por ti.
+              </p>
+              <p class="final-text-emphasis">
+                Te amo más allá del sol, más allá de las estrellas, 
+                más allá de todo lo que existe y lo que pueda existir.
+              </p>
+              <p class="final-signature">
+                Por siempre tuyo,<br>
+                <em>Tu bebecito 💕</em>
+              </p>
+              <div class="message-decoration">❤️</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="back-to-top">
+      <button class="btn-back" id="btn-back-top"><span>Volver al inicio</span></button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
